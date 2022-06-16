@@ -1,0 +1,12 @@
+{
+  "id": "builtin.language-basics-dotenv",
+  "name": "Language Basics Dotenv",
+  "description": "Provides syntax highlighting and bracket matching in dotenv files.",
+  "languages": [
+    {
+      "id": "dotenv",
+      "extensions": [".env", ".env.local"],
+      "configuration": "./languageConfiguration.json"
+    }
+  ]
+}
