@@ -1,4 +1,4 @@
-# Language Basics DOTENV
+# Language Basics Dotenv
 
 ## Contributing
 
