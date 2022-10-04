@@ -1,5 +1,5 @@
 KeywordExport
 Whitespace
-VariableName
+JsonPropertyName
 Punctuation
 LanguageConstant

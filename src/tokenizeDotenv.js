@@ -65,8 +65,8 @@ export const TokenMap = {
   [TokenType.KeywordExport]: 'KeywordExport',
   [TokenType.VariableValueString]: 'String',
   [TokenType.LanguageConstant]: 'LanguageConstant',
-  [TokenType.VariableValue]: 'VariableValue',
-  [TokenType.VariableName]: 'VariableName',
+  [TokenType.VariableValue]: 'String',
+  [TokenType.VariableName]: 'JsonPropertyName',
   [TokenType.NewLine]: 'NewLine',
 }
 
