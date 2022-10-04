@@ -283,6 +283,14 @@ export const tokenizeLine = (line, lineState) => {
     index += tokenLength
     tokens.push(token, tokenLength)
   }
+  switch (state) {
+    case State.AfterVariableName:
+    case State.AfterAssignmentEqualSign:
+      state = State.TopLevelContent
+      break
+    default:
+      break
+  }
   if (state === State.AfterVariableValue) {
     state = State.TopLevelContent
   }
@@ -291,7 +299,3 @@ export const tokenizeLine = (line, lineState) => {
     tokens,
   }
 }
-
-// tokenizeLine(initialContext, '# comment') //?
-
-// tokenizeLine('KEY=42"', initialLineState) //?
