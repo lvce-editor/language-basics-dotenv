@@ -1,8 +1,8 @@
-VariableName
+JsonPropertyName
 Punctuation
 Numeric
 NewLine
-VariableName
+JsonPropertyName
 Punctuation
 Numeric
 NewLine

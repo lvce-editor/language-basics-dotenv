@@ -1,5 +1,5 @@
 Whitespace
-VariableName
+JsonPropertyName
 Punctuation
 Numeric
 Whitespace

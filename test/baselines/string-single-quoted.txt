@@ -1,4 +1,4 @@
-VariableName
+JsonPropertyName
 Punctuation
 Punctuation
 String

@@ -1,4 +1,4 @@
-VariableName
+JsonPropertyName
 Punctuation
 LanguageConstant
 NewLine
