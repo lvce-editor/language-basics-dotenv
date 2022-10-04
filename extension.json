@@ -6,6 +6,7 @@
     {
       "id": "dotenv",
       "extensions": [".env", ".env.local"],
+      "fileNames": ["sampledotenv"],
       "configuration": "./languageConfiguration.json",
       "tokenize": "src/tokenizeDotenv.js"
     }
