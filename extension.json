@@ -14,7 +14,8 @@
         ".env.production.example",
         ".env.development",
         ".env.production",
-        ".env.dev"
+        ".env.dev",
+        ".env.sample"
       ],
       "configuration": "./languageConfiguration.json",
       "tokenize": "src/tokenizeDotenv.js"
