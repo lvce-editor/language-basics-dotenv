@@ -88,7 +88,6 @@ const RE_BLOCK_COMMENT_END = /^\*\//
 const RE_UNKNOWN_VALUE = /^[^\}\{\s,"]+/
 const RE_IMPORT = /^[a-zA-Z\.]+/
 const RE_SEMICOLON = /^;/
-const RE_LINE_COMMENT = /^\/\//
 const RE_ROUND_OPEN = /^\(/
 const RE_ROUND_CLOSE = /^\)/
 const RE_DOT = /^\./
@@ -299,6 +298,9 @@ export const tokenizeLine = (line, lineState) => {
         if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
           state = State.TopLevelContent
+        } else if ((next = part.match(RE_LINE_COMMENT_START))) {
+          token = TokenType.Comment
+          state = State.InsideLineComment
         } else if ((next = part.match(RE_ANYTHING_UNTIL_END))) {
           token = TokenType.Error
           state = State.TopLevelContent
