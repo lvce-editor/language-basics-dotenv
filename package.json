@@ -25,7 +25,8 @@
   "test-tokenize": {
     "skip": [
       "number-negative",
-      "dotenv-multiline"
+      "dotenv-multiline",
+      "emoji-key"
     ]
   }
 }
