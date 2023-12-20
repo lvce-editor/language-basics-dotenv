@@ -13,6 +13,8 @@ export const State = {
   InsideSingleQuoteString: 9,
   InsideDoubleQuoteStringAfterBackslash: 10,
   InsideSingleQuoteStringAfterBackslash: 11,
+  InsideBackTickQuoteString: 12,
+  InsideBackTickQuoteStringAfterBackslash: 13,
 }
 
 /**
@@ -105,16 +107,19 @@ const RE_TEXT = /^.+/s
 const RE_WHITESPACE = /^\s+/
 const RE_WHITESPACE_SINGLE_LINE = /^( |\t)+/
 const RE_DOUBLE_QUOTE = /^"/
+const RE_BACKTICK_QUOTE = /^`/
 const RE_LINE_COMMENT_START = /^#/
 const RE_LINE_COMMENT_CONTENT = /^[^\n]+/
 const RE_VARIABLE_NAME = /^[a-zA-Z\_]+/
 const RE_EQUAL_SIGN = /^=/
 const RE_NUMBER =
   /^\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\.?[0-9]*)|(\.[0-9]+))((e|E)(\+|-)?[0-9]+)?)\b/
+
 const RE_KEYWORD_EXPORT = /^export(?=(\t| ))/
 const RE_CONSTANT = /^(true|false|null)(?=\s|$)/i
 const RE_VARIABLE_VALUE = /^[^\n"'#]+/
 const RE_STRING_DOUBLE_QUOTE_CONTENT = /^[^\n\\"]+/
+const RE_STRING_BACKTICK_QUOTE_CONTENT = /^[^\n\\`]+/
 const RE_STRING_SINGLE_QUOTE_CONTENT = /^[^\n\\']+/
 const RE_SINGLE_QUOTE = /^'/
 const RE_NEWLINE_AND_WHITESPACE = /^\n\s*/
@@ -208,6 +213,29 @@ export const tokenizeLine = (line, lineState) => {
           throw new Error('no')
         }
         break
+      case State.InsideBackTickQuoteString:
+        if ((next = part.match(RE_BACKTICK_QUOTE))) {
+          token = TokenType.PunctuationString
+          state = State.AfterVariableValue
+        } else if ((next = part.match(RE_STRING_BACKTICK_QUOTE_CONTENT))) {
+          token = TokenType.VariableValueString
+          state = State.InsideBackTickQuoteString
+        } else if ((next = part.match(RE_BACKSLASH))) {
+          token = TokenType.VariableValueString
+          state = State.InsideBackTickQuoteStringAfterBackslash
+        } else {
+          part.startsWith('\n') //?
+          throw new Error('no')
+        }
+        break
+      case State.InsideBackTickQuoteStringAfterBackslash:
+        if ((next = part.match(RE_EVERYTHING))) {
+          token = TokenType.VariableValueString
+          state = State.InsideBackTickQuoteString
+        } else {
+          throw new Error('no')
+        }
+        break
       case State.InsideSingleQuoteStringAfterBackslash:
         if ((next = part.match(RE_EVERYTHING))) {
           token = TokenType.VariableValueString
@@ -237,6 +265,9 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_SINGLE_QUOTE))) {
           token = TokenType.Punctuation
           state = State.InsideSingleQuoteString
+        } else if ((next = part.match(RE_BACKTICK_QUOTE))) {
+          token = TokenType.Punctuation
+          state = State.InsideBackTickQuoteString
         } else if ((next = part.match(RE_NUMBER))) {
           token = TokenType.Numeric
           state = State.AfterVariableValue
