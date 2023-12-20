@@ -1,4 +1,5 @@
 JsonPropertyName
 Punctuation
+Punctuation
 String
-Error
+PunctuationString
