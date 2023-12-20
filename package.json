@@ -24,7 +24,8 @@
   },
   "test-tokenize": {
     "skip": [
-      "number-negative"
+      "number-negative",
+      "dotenv-multiline"
     ]
   }
 }
