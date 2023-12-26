@@ -72,37 +72,7 @@ export const TokenMap = {
   [TokenType.NewLine]: 'NewLine',
 }
 
-const RE_WHITESPACE_NEWLINE = /^\n/
-const RE_CURLY_OPEN = /^\{/
-const RE_CURLY_CLOSE = /^\}/
-const RE_SQUARE_OPEN = /^\[/
-const RE_SQUARE_CLOSE = /^\]/
-const RE_COMMA = /^,/
-const RE_COLON = /^:/
-const RE_NUMERIC =
-  /^((0(x|X)[0-9a-fA-F]*)|(([0-9]+\.?[0-9]*)|(\.[0-9]+))((e|E)(\+|-)?[0-9]+)?)/
-const RE_NEWLINE_WHITESPACE = /^\n\s*/
-const RE_BLOCK_COMMENT_START = /^\/\*/
-const RE_BLOCK_COMMENT_CONTENT = /^.+(?=\*\/|$)/s
-const RE_BLOCK_COMMENT_END = /^\*\//
-const RE_UNKNOWN_VALUE = /^[^\}\{\s,"]+/
-const RE_IMPORT = /^[a-zA-Z\.]+/
-const RE_SEMICOLON = /^;/
-const RE_ROUND_OPEN = /^\(/
-const RE_ROUND_CLOSE = /^\)/
-const RE_DOT = /^\./
-const RE_PUNCTUATION = /^[\(\)=\+\-><\.,\/\*\^\[\]\{\}\|:]/
 const RE_ANYTHING_UNTIL_END = /^.+/s
-const RE_START_OF_FUNCTION = /^( )*\(/
-const RE_COLON_COLON = /^::/
-const RE_BASH_SLASH = /^\\/
-const RE_ANY_CHAR = /^./
-const RE_SQUARE_OPEN_SQUARE_OPEN = /^\[\[/
-const RE_SQUARE_CLOSE_SQUARE_CLOSE = /^\]\]/
-const RE_STRING_MULTILINE_CONTENT = /^.+?(?=\]\]|$)/s
-const RE_KEYWORD =
-  /^(?:var|type|switch|struct|select|return|range|package|map|interface|import|if|goto|go|func|default|continue|const|chan|case|break)\b/
-const RE_TEXT = /^.+/s
 const RE_WHITESPACE = /^\s+/
 const RE_WHITESPACE_SINGLE_LINE = /^( |\t)+/
 const RE_DOUBLE_QUOTE = /^"/
