@@ -79,7 +79,7 @@ const RE_DOUBLE_QUOTE = /^"/
 const RE_BACKTICK_QUOTE = /^`/
 const RE_LINE_COMMENT_START = /^#/
 const RE_LINE_COMMENT_CONTENT = /^[^\n]+/
-const RE_VARIABLE_NAME = /^[a-zA-Z\_]+/
+const RE_VARIABLE_NAME = /^[a-zA-Z\_\d]+/
 const RE_EQUAL_SIGN = /^=/
 const RE_NUMBER =
   /^\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\.?[0-9]*)|(\.[0-9]+))((e|E)(\+|-)?[0-9]+)?)\b/
@@ -231,7 +231,10 @@ export const tokenizeLine = (line, lineState) => {
         }
         break
       case State.AfterAssignmentEqualSign:
-        if ((next = part.match(RE_DOUBLE_QUOTE))) {
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.AfterAssignmentEqualSign
+        } else if ((next = part.match(RE_DOUBLE_QUOTE))) {
           token = TokenType.PunctuationString
           state = State.InsideDoubleQuoteString
         } else if ((next = part.match(RE_SINGLE_QUOTE))) {
@@ -255,6 +258,9 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_NEWLINE_AND_WHITESPACE))) {
           token = TokenType.Whitespace
           state = State.TopLevelContent
+        } else if ((next = part.match(RE_LINE_COMMENT_START))) {
+          token = TokenType.Comment
+          state = State.InsideLineComment
         } else {
           throw new Error('no')
         }
