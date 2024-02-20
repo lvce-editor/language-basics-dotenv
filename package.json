@@ -28,7 +28,6 @@
       "dotenv-multiline",
       "emoji-key",
       "php-dotenv-exported",
-      "php-dotenv-nested",
       "php-dotenv-unicodevarnames"
     ]
   }
