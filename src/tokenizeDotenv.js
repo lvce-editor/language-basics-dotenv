@@ -156,7 +156,9 @@ export const tokenizeLine = (line, lineState) => {
           state = State.AfterAssignmentEqualSign
         } else if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
-          // TODO what about newline
+          state = State.AfterVariableName
+        } else if ((next = part.match(RE_VARIABLE_NAME))) {
+          token = TokenType.VariableName
           state = State.AfterVariableName
         } else {
           throw new Error('no')
