@@ -1,0 +1,9 @@
+KeywordExport
+Whitespace
+PunctuationString
+String
+PunctuationString
+Whitespace
+Punctuation
+Whitespace
+Numeric

@@ -24,8 +24,7 @@
   },
   "test-tokenize": {
     "skip": [
-      "dotenv-multiline",
-      "php-dotenv-exported"
+      "dotenv-multiline"
     ]
   }
 }

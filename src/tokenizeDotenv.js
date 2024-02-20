@@ -99,6 +99,7 @@ const RE_EVERYTHING = /^./
 
 export const initialLineState = {
   state: State.TopLevelContent,
+  stack: [],
 }
 
 export const hasArrayReturn = true
@@ -112,6 +113,7 @@ export const tokenizeLine = (line, lineState) => {
   let tokens = []
   let token = TokenType.None
   let state = lineState.state
+  let stack = [...lineState.stack]
   while (index < line.length) {
     const part = line.slice(index)
     switch (state) {
@@ -139,8 +141,15 @@ export const tokenizeLine = (line, lineState) => {
         if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
           state = State.AfterKeywordAndHasSeenWhitespace
+        } else if ((next = part.match(RE_DOUBLE_QUOTE))) {
+          stack.push(State.AfterVariableName)
+          token = TokenType.PunctuationString
+          state = State.InsideDoubleQuoteString
+        } else if ((next = part.match(RE_SINGLE_QUOTE))) {
+          stack.push(State.AfterVariableName)
+          token = TokenType.PunctuationString
+          state = State.InsideSingleQuoteString
         } else {
-          line
           throw new Error('no')
         }
         break
@@ -148,6 +157,17 @@ export const tokenizeLine = (line, lineState) => {
         if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.VariableName
           state = State.AfterVariableName
+        } else if ((next = part.match(RE_DOUBLE_QUOTE))) {
+          stack.push(State.AfterVariableName)
+          token = TokenType.PunctuationString
+          state = State.InsideDoubleQuoteString
+        } else if ((next = part.match(RE_SINGLE_QUOTE))) {
+          stack.push(State.AfterVariableName)
+          token = TokenType.PunctuationString
+          state = State.InsideSingleQuoteString
+        } else if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.AfterKeywordAndHasSeenWhitespace
         } else {
           throw new Error('no')
         }
@@ -169,7 +189,7 @@ export const tokenizeLine = (line, lineState) => {
       case State.InsideDoubleQuoteString:
         if ((next = part.match(RE_DOUBLE_QUOTE))) {
           token = TokenType.PunctuationString
-          state = State.AfterVariableValue
+          state = stack.pop() || State.AfterVariableValue
         } else if ((next = part.match(RE_STRING_DOUBLE_QUOTE_CONTENT))) {
           token = TokenType.VariableValueString
           state = State.InsideDoubleQuoteString
@@ -316,5 +336,6 @@ export const tokenizeLine = (line, lineState) => {
   return {
     state,
     tokens,
+    stack,
   }
 }
