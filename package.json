@@ -26,9 +26,7 @@
     "skip": [
       "number-negative",
       "dotenv-multiline",
-      "emoji-key",
-      "php-dotenv-exported",
-      "php-dotenv-unicodevarnames"
+      "php-dotenv-exported"
     ]
   }
 }
