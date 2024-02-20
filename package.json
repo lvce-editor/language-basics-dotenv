@@ -24,7 +24,6 @@
   },
   "test-tokenize": {
     "skip": [
-      "number-negative",
       "dotenv-multiline",
       "php-dotenv-exported"
     ]
