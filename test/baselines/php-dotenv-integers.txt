@@ -38,7 +38,8 @@ LanguageConstant
 NewLine
 JsonPropertyName
 Punctuation
-String
+Punctuation
+Numeric
 NewLine
 JsonPropertyName
 Punctuation
