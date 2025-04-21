@@ -7,7 +7,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 const root = path.join(__dirname, '..')
 
 const REPO = 'https://github.com/motdotla/dotenv'
-const COMMIT = '5d00dd9d1561059247eb31a2841cbc2e2b14f273'
+const COMMIT = 'e2586db955cba6268dab0ed867b693cfe3ff5b34'
 
 const getTestName = (line) => {
   return (
