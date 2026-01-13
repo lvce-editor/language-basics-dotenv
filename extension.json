@@ -5,7 +5,9 @@
   "languages": [
     {
       "id": "dotenv",
-      "extensions": [".env"],
+      "extensions": [
+        ".env"
+      ],
       "fileNames": [
         "sampledotenv",
         ".env.dev",
@@ -24,5 +26,6 @@
       "configuration": "./languageConfiguration.json",
       "tokenize": "src/tokenizeDotenv.js"
     }
-  ]
+  ],
+  "repository": "https://github.com/lvce-editor/language-basics-dotenv"
 }
