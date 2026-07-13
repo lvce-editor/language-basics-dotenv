@@ -5,9 +5,7 @@
   "languages": [
     {
       "id": "dotenv",
-      "extensions": [
-        ".env"
-      ],
+      "extensions": [".env"],
       "fileNames": [
         "sampledotenv",
         ".env.dev",
