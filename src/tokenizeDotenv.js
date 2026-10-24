@@ -82,7 +82,7 @@ const RE_LINE_COMMENT_CONTENT = /^[^\n]+/
 const RE_VARIABLE_NAME = /^[^=\{\}\"\'\s]+/
 const RE_EQUAL_SIGN = /^=/
 const RE_NUMBER =
-  /^((0(x|X)[0-9a-fA-F]*)|(([0-9]+\.?[0-9]*)|(\.[0-9]+))((e|E)(\+|-)?[0-9]+)?)\b/
+  /^((0(x|X)[0-9a-fA-F]*)|(([0-9]+\.?[0-9]*)|(\.[0-9]+))((e|E)(\+|-)?[0-9]+)?)\b(?!\.[0-9]|[-+][A-Za-z0-9])/
 
 const RE_NUMBER_MINUS = /^\-(?=\d+)\b/
 
