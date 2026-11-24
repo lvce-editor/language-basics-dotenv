@@ -82,7 +82,7 @@ const RE_LINE_COMMENT_CONTENT = /^[^\n]+/
 const RE_VARIABLE_NAME = /^[^=\{\}\"\'\s]+/
 const RE_EQUAL_SIGN = /^=/
 const RE_NUMBER =
-  /^((0(x|X)[0-9a-fA-F]*)|(([0-9]+\.?[0-9]*)|(\.[0-9]+))((e|E)(\+|-)?[0-9]+)?)\b(?!\.[0-9]|[-+][A-Za-z0-9])/
+  /^((0(x|X)[0-9a-fA-F]*)|(([0-9]+\.?[0-9]*)|(\.[0-9]+))((e|E)(\+|-)?[0-9]+)?)\b(?=\s|[#'"]|$)/
 
 const RE_NUMBER_MINUS = /^\-(?=\d+)\b/
 
@@ -267,7 +267,10 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_BACKTICK_QUOTE))) {
           token = TokenType.Punctuation
           state = State.InsideBackTickQuoteString
-        } else if ((next = part.match(RE_NUMBER_MINUS))) {
+        } else if (
+          (next = part.match(RE_NUMBER_MINUS)) &&
+          RE_NUMBER.test(part.slice(1))
+        ) {
           token = TokenType.Punctuation
           state = State.AfterAssignmentEqualSign
         } else if ((next = part.match(RE_NUMBER))) {
